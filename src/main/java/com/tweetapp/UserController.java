@@ -12,15 +12,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 	
 	@Autowired 
-	private UserServiceImpl userService;
+	private UserRepository userRepo;
 	
 	@PostMapping("/addUser")
 	public User addUser(@RequestBody User user) {
-		return userService.addUser(user);
+		return userRepo.save(user);  /* save method is predefine method in Mongo Repository
+		                                with this method we will save user in our database. */
 	}
 	
 	@GetMapping("/getAllUser")
 	public List<User> getAllUser(){
-		return userService.getAllUser();
+		return userRepo.findAll();  /* findAll method is predefine method in Mongo Repository 
+		                             with this method we will all user that is save in our database.*/
 	}
 }
